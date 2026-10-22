@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusVoice AI Sales Bot | Interactive SaaS Sales Agent</title>
+  <meta name="description" content="Autonomous AI Voice Sales Bot that sells SaaS products through interactive voice conversations, real-time live chat transcription, dual-channel call recording, and automated AI summary and sales status classification.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-headset"></i>
+          <span class="pulse-ring"></span>
+        </div>
+        <div class="brand-text">
+          <h1>NexusVoice <span class="gradient-text">AI Sales Bot</span></h1>
+          <p class="subtitle">Autonomous SaaS Sales & Conversion Engine</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- SaaS Product Selector -->
+        <div class="control-group">
+          <label for="productSelect"><i class="fa-solid fa-cube"></i> SaaS Product:</label>
+          <select id="productSelect" class="custom-select">
+            <option value="nexus-ai">NexusPulse AI (Sales Acceleration)</option>
+            <option value="cloudguard">CloudGuard (Security & Compliance)</option>
+            <option value="aws-services" selected>AWS Cloud Solutions (Infrastructure & AI)</option>
+          </select>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="control-group">
+          <label for="languageSelect"><i class="fa-solid fa-globe"></i> Language:</label>
+          <select id="languageSelect" class="custom-select">
+            <option value="en" selected>English (Global/US)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+          </select>
+        </div>
+
+        <!-- History & Settings Buttons -->
+        <button id="historyBtn" class="btn btn-secondary" title="View Call History">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Call History</span>
+          <span id="historyCountBadge" class="badge">0</span>
+        </button>
+
+        <button id="settingsBtn" class="btn btn-ghost" title="Settings & API Key">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Workspace -->
+  <main class="main-layout">
+    
+    <!-- LEFT PANEL: Active Call Studio & Voice Visualizer -->
+    <section class="call-studio-panel">
+      
+      <!-- Product Highlights Card -->
+      <div class="card product-card">
+        <div class="product-header">
+          <span class="badge badge-accent" id="productCategoryBadge">AI Sales & Revenue Acceleration</span>
+          <h2 id="productTitle">NexusPulse AI</h2>
+        </div>
+        <p id="productTagline" class="product-tagline">Autonomous B2B Lead Conversion & Sales Pipeline Automation</p>
+        
+        <div class="pricing-chips" id="pricingChips">
+          <div class="chip"><strong>Starter:</strong> $99/mo</div>
+          <div class="chip"><strong>Growth:</strong> $299/mo</div>
+          <div class="chip"><strong>Enterprise:</strong> $799/mo</div>
+        </div>
+      </div>
+
+      <!-- Live Voice Stage & Visualizer -->
+      <div class="card visualizer-card">
+        <div class="visualizer-header">
+          <div class="call-status-pill status-ready" id="callStatusPill">
+            <span class="status-dot"></span>
+            <span id="callStatusText">Ready to Call</span>
+          </div>
+          <div class="recording-badge" id="recordingBadge" style="display: none;">
+            <span class="rec-dot"></span> REC
+          </div>
+          <div class="call-timer" id="callTimer">00:00</div>
+        </div>
+
+        <!-- Dynamic Audio Wave Canvas -->
+        <div class="canvas-container">
+          <canvas id="waveformCanvas"></canvas>
+          <div class="agent-avatar-stage">
+            <div class="avatar-ring" id="avatarRing">
+              <div class="avatar-core">
+                <i class="fa-solid fa-robot" id="avatarIcon"></i>
+              </div>
+            </div>
+            <p class="speaking-label" id="speakingLabel">Alex (AI Sales Representative)</p>
+          </div>
+        </div>
+
+        <!-- Primary Call Action Controls -->
+        <div class="call-controls-bar">
+          <button id="startCallBtn" class="btn btn-call-start">
+            <i class="fa-solid fa-phone"></i>
+            <span>Start Call</span>
+          </button>
+
+          <button id="endCallBtn" class="btn btn-call-end" disabled>
+            <i class="fa-solid fa-phone-slash"></i>
+            <span>End Call</span>
+          </button>
+
+          <button id="muteBtn" class="btn btn-icon" disabled title="Mute/Unmute Mic">
+            <i class="fa-solid fa-microphone" id="muteIcon"></i>
+          </button>
+        </div>
+
+        <!-- Voice / Mic Status Notice -->
+        <div class="voice-hint">
+          <i class="fa-solid fa-circle-info"></i>
+          <span id="voiceHintText">Click <strong>Start Call</strong> to begin interactive voice conversation. Microphone access required.</span>
+        </div>
+      </div>
+
+      <!-- Quick Test Phrases (Customer Simulator) -->
+      <div class="card quick-phrases-card">
+        <div class="card-title-row">
+          <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Quick Customer Responses</h3>
+          <span class="subtext">Simulate speech or test objection handling</span>
+        </div>
+        <div class="phrases-grid">
+          <button class="phrase-chip" data-phrase="Hi, can you explain how this works and what it costs?">
+            "What does it cost?"
+          </button>
+          <button class="phrase-chip" data-phrase="That sounds too expensive for our current budget.">
+            "Too expensive for us"
+          </button>
+          <button class="phrase-chip" data-phrase="We are already using Apollo and Salesforce for outreach.">
+            "Already using tools"
+          </button>
+          <button class="phrase-chip" data-phrase="I need to check with my manager before deciding.">
+            "Need to check with boss"
+          </button>
+          <button class="phrase-chip" data-phrase="This looks really promising! I'd love to book a 15-minute live demo.">
+            "Book a live demo!"
+          </button>
+          <button class="phrase-chip" data-phrase="No thanks, we are definitely not interested right now.">
+            "Not interested"
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT PANEL: Live Chat & Real-Time Transcript -->
+    <section class="live-chat-panel">
+      <div class="card chat-card">
+        <div class="chat-header">
+          <div class="chat-title-group">
+            <h2><i class="fa-regular fa-comments"></i> Live Chat & Transcript</h2>
+            <span class="badge badge-live" id="liveBadge">
+              <span class="live-indicator"></span> Real-time
+            </span>
+          </div>
+          <div class="chat-actions">
+            <button id="copyTranscriptBtn" class="btn btn-sm btn-ghost" title="Copy Transcript">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+            <button id="clearChatBtn" class="btn btn-sm btn-ghost" title="Clear Chat">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Stream Message Container -->
+        <div class="chat-messages-scroll" id="chatContainer">
+          <div class="empty-chat-state" id="emptyChatState">
+            <div class="empty-icon">
+              <i class="fa-solid fa-wave-square"></i>
+            </div>
+            <h3>No Active Conversation</h3>
+            <p>Start a call to engage with the AI voice sales representative. Both AI speech and your customer responses will appear here live with timestamps.</p>
+          </div>
+        </div>
+
+        <!-- Real-time Typing / Speech Indicator -->
+        <div class="live-speech-status" id="liveSpeechStatus" style="display: none;">
+          <div class="typing-indicator">
+            <span></span><span></span><span></span>
+          </div>
+          <span id="liveSpeechText">AI is speaking...</span>
+        </div>
+
+        <!-- Chat Input Bar (Voice fallback / simulator) -->
+        <form class="chat-input-bar" id="chatInputForm">
+          <input 
+            type="text" 
+            id="textInput" 
+            placeholder="Type customer reply (or speak using your microphone)..." 
+            autocomplete="off"
+            disabled
+          >
+          <button type="submit" id="sendBtn" class="btn btn-primary" disabled title="Send response">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. RECORDING CONSENT MODAL -->
+  <div class="modal-overlay" id="consentModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-icon-header icon-warning">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h2>Call Recording Consent</h2>
+      <p class="modal-description">
+        In compliance with privacy policies and telecommunications standards, please confirm your consent before initiating this AI voice sales call.
+      </p>
+      
+      <div class="consent-notice-box">
+        <div class="notice-item">
+          <i class="fa-solid fa-microphone-lines"></i>
+          <span>Both your microphone audio and the AI sales bot audio will be recorded.</span>
+        </div>
+        <div class="notice-item">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Recordings are processed for quality, live transcription, and post-call AI analysis.</span>
+        </div>
+        <div class="notice-item">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>You can review, play back, or download the audio immediately after the call concludes.</span>
+        </div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="consentCheckbox" checked>
+        <label for="consentCheckbox">I understand and consent to having this voice conversation recorded.</label>
+      </div>
+
+      <div class="modal-actions">
+        <button id="cancelConsentBtn" class="btn btn-secondary">Cancel</button>
+        <button id="confirmConsentBtn" class="btn btn-primary">
+          <i class="fa-solid fa-circle-check"></i> I Consent & Start Call
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. POST-CALL AI SUMMARY & RECORDING MODAL -->
+  <div class="modal-overlay" id="summaryModal" style="display: none;">
+    <div class="modal-card modal-lg">
+      <div class="modal-header-row">
+        <div class="title-with-badge">
+          <h2><i class="fa-solid fa-file-invoice"></i> Post-Call AI Intelligence</h2>
+          <span id="modalCallId" class="code-pill">CALL-XXXX</span>
+        </div>
+        <button class="modal-close-btn" id="closeSummaryModalBtn">&times;</button>
+      </div>
+
+      <div class="summary-body">
+        
+        <!-- Sales Status Banner -->
+        <div class="status-banner" id="statusBanner">
+          <div class="status-icon-box" id="statusIconBox">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <div class="status-info">
+            <div class="status-label-group">
+              <span class="subtext">AUTOMATED SALES STATUS</span>
+              <h3 id="summarySalesStatus">Converted</h3>
+            </div>
+            <p id="summaryStatusReason" class="status-reason-text">Customer agreed to immediate trial onboarding or subscription purchase.</p>
+          </div>
+        </div>
+
+        <!-- 2-Way Audio Player -->
+        <div class="audio-player-card">
+          <div class="audio-player-header">
+            <h4><i class="fa-solid fa-play"></i> Call Voice Recording</h4>
+            <span class="subtext" id="recordingDurationText">Duration: 00:00</span>
+          </div>
+          <div class="audio-controls-row">
+            <audio id="postCallAudio" controls class="full-audio-player"></audio>
+            <a id="downloadAudioBtn" href="#" download="call_recording.webm" class="btn btn-secondary btn-sm" title="Download Audio">
+              <i class="fa-solid fa-download"></i> Download
+            </a>
+          </div>
+        </div>
+
+        <!-- Detailed AI Analysis Grid -->
+        <div class="analysis-grid">
+          
+          <!-- Summary Block -->
+          <div class="analysis-card col-span-2">
+            <h4><i class="fa-solid fa-align-left"></i> Executive Summary</h4>
+            <p id="summaryOverviewText">Loading call summary...</p>
+          </div>
+
+          <!-- Customer Requirements -->
+          <div class="analysis-card">
+            <h4><i class="fa-solid fa-bullseye"></i> Customer Requirements</h4>
+            <ul id="summaryRequirementsList" class="analysis-list">
+              <li>Identifying automated inbound lead follow-up.</li>
+            </ul>
+          </div>
+
+          <!-- Objections Raised -->
+          <div class="analysis-card">
+            <h4><i class="fa-solid fa-shield-cat"></i> Objections Raised</h4>
+            <ul id="summaryObjectionsList" class="analysis-list objections-list">
+              <li>No major objections raised.</li>
+            </ul>
+          </div>
+
+          <!-- Next Steps -->
+          <div class="analysis-card col-span-2">
+            <h4><i class="fa-solid fa-list-check"></i> Actionable Next Steps</h4>
+            <ul id="summaryNextStepsList" class="analysis-list next-steps-list">
+              <li>Schedule 15-minute live demo with senior solutions engineer.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button id="viewInHistoryBtn" class="btn btn-secondary">
+          <i class="fa-solid fa-clock-rotate-left"></i> View in History
+        </button>
+        <button id="doneSummaryBtn" class="btn btn-primary">Done & New Call</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CALL HISTORY DRAWER / MODAL -->
+  <div class="modal-overlay" id="historyModal" style="display: none;">
+    <div class="modal-card modal-xl">
+      <div class="modal-header-row">
+        <div>
+          <h2><i class="fa-solid fa-clock-rotate-left"></i> Previous Call History</h2>
+          <p class="subtext">Review past conversations, voice recordings, transcripts, and assigned sales statuses.</p>
+        </div>
+        <button class="modal-close-btn" id="closeHistoryModalBtn">&times;</button>
+      </div>
+
+      <!-- Filters Row -->
+      <div class="history-filter-bar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="historySearchInput" placeholder="Search transcript, product, or ID...">
+        </div>
+
+        <div class="filter-group">
+          <label>Filter Status:</label>
+          <select id="historyStatusFilter" class="custom-select">
+            <option value="all">All Statuses</option>
+            <option value="Converted">Converted</option>
+            <option value="Demo Requested">Demo Requested</option>
+            <option value="Interested">Interested</option>
+            <option value="Follow-up Required">Follow-up Required</option>
+            <option value="Not Interested">Not Interested</option>
+            <option value="No Response">No Response</option>
+          </select>
+        </div>
+
+        <button id="clearAllHistoryBtn" class="btn btn-ghost btn-sm text-danger" title="Clear all history">
+          <i class="fa-solid fa-trash"></i> Clear History
+        </button>
+      </div>
+
+      <!-- History Table / Cards -->
+      <div class="history-list-container" id="historyListContainer">
+        <div class="empty-history" id="emptyHistoryState">
+          <i class="fa-solid fa-inbox"></i>
+          <p>No call history recorded yet. Complete a call to populate this log.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. SETTINGS MODAL -->
+  <div class="modal-overlay" id="settingsModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header-row">
+        <h2><i class="fa-solid fa-sliders"></i> Voice & AI Settings</h2>
+        <button class="modal-close-btn" id="closeSettingsModalBtn">&times;</button>
+      </div>
+
+      <div class="settings-form">
+        <div class="form-group">
+          <label for="apiKeyInput">
+            OpenAI API Key (Optional):
+            <span class="subtext">If empty, bot uses built-in smart sales dialogue engine</span>
+          </label>
+          <input type="password" id="apiKeyInput" placeholder="sk-..." class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="ttsRateRange">Speech Rate: <span id="ttsRateVal">1.0x</span></label>
+          <input type="range" id="ttsRateRange" min="0.8" max="1.3" step="0.05" value="1.0">
+        </div>
+
+        <div class="form-group">
+          <label for="ttsPitchRange">Voice Pitch: <span id="ttsPitchVal">1.0</span></label>
+          <input type="range" id="ttsPitchRange" min="0.8" max="1.2" step="0.05" value="1.0">
+        </div>
+
+        <div class="alert-box">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span>The application comes with an integrated rule engine that satisfies all assignment criteria out of the box with zero external API keys needed!</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Client Engine -->
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+[
+  {
+    "id": "call_test1",
+    "created_at": "2026-10-20T13:30:00Z",
+    "duration": "01:45",
+    "product_name": "NexusPulse AI",
+    "language": "en",
+    "sales_status": "Demo Requested",
+    "status_reason": "Customer requested a live demo.",
+    "summary": "Customer asked about CRM integration and scheduled a 15-minute live demo.",
+    "transcript": [
+      {
+        "sender": "bot",
+        "text": "Hi Alex here"
+      },
+      {
+        "sender": "user",
+        "text": "Can I book a demo?"
+      }
+    ],
+    "customer_requirements": [
+      "HubSpot CRM sync"
+    ],
+    "objections": [
+      "No major objections"
+    ],
+    "next_steps": [
+      "Send Google Meet invite"
+    ]
+  },
+  {
+    "id": "call_mvgfimq8",
+    "created_at": "2026-10-20T08:38:20.684Z",
+    "duration": "01:56",
+    "duration_seconds": 116,
+    "product_id": "nexus-ai",
+    "product_name": "NexusPulse AI",
+    "language": "en",
+    "transcript": [
+      {
+        "sender": "bot",
+        "text": "Hi there! This is Alex from NexusPulse AI. We help B2B teams automate lead follow-ups and 3x their sales pipeline with autonomous AI voice agents. How are you doing today?",
+        "timestamp": "02:06 PM"
+      },
+      {
+        "sender": "user",
+        "text": "I am doing good",
+        "timestamp": "02:06 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That's a great point! With NexusPulse AI, our autonomous voice platform can handle inbound leads within 15 seconds and sync directly with your CRM. Would you be open to a quick 15-minute live demo this week to see it in action?",
+        "timestamp": "02:06 PM"
+      },
+      {
+        "sender": "user",
+        "text": "TS sure",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That sounds amazing! I can schedule a tailored 15-minute live demo with our senior solution architect and activate your 14-day free trial right away. Does tomorrow morning or afternoon work better for your calendar?",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Tomorrow morning works better",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That's a great point! With NexusPulse AI, our autonomous voice platform can handle inbound leads within 15 seconds and sync directly with your CRM. Would you be open to a quick 15-minute live demo this week to see it in action?",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That sounds amazing! I can schedule a tailored 15-minute live demo with our senior solution architect and activate your 14-day free trial right away. Does tomorrow morning or afternoon work better for your calendar?",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That sounds amazing! I can schedule a tailored 15-minute live demo with our senior solution architect and activate your 14-day free trial right away. Does tomorrow morning or afternoon work better for your calendar?",
+        "timestamp": "02:07 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Afternoon",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That's a great point! With NexusPulse AI, our autonomous voice platform can handle inbound leads within 15 seconds and sync directly with your CRM. Would you be open to a quick 15-minute live demo this week to see it in action?",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "user",
+        "text": "asd",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That's a great point! With NexusPulse AI, our autonomous voice platform can handle inbound leads within 15 seconds and sync directly with your CRM. Would you be open to a quick 15-minute live demo this week to see it in action?",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "user",
+        "text": "asd",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That's a great point! With NexusPulse AI, our autonomous voice platform can handle inbound leads within 15 seconds and sync directly with your CRM. Would you be open to a quick 15-minute live demo this week to see it in action?",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "user",
+        "text": "a",
+        "timestamp": "02:08 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That's a great point! With NexusPulse AI, our autonomous voice platform can handle inbound leads within 15 seconds and sync directly with your CRM. Would you be open to a quick 15-minute live demo this week to see it in action?",
+        "timestamp": "02:08 PM"
+      }
+    ],
+    "recording_url": "/recordings/call_call_mvgfimq8_20261020_140820.webm",
+    "sales_status": "Demo Requested",
+    "status_reason": "Customer expressed direct interest in experiencing a live 15-minute product demonstration or walkthrough.",
+    "summary": "The customer interacted with NexusPulse AI voice sales representative over 9 conversational turns. The sales bot introduced the core value proposition of automated lead conversion. Key discussion centered around general exploration of ai voice automation solutions.. Final sentiment outcome: Demo Requested (Customer expressed direct interest in experiencing a live 15-minute product demonstration or walkthrough.).",
+    "customer_requirements": [
+      "General exploration of AI voice automation solutions."
+    ],
+    "objections": [
+      "No major objections raised during the conversation."
+    ],
+    "next_steps": [
+      "Send calendar invite with Google Meet link for 15-minute live demo.",
+      "Prepare customized CRM integration walkthrough based on customer industry.",
+      "Send pre-demo 2-minute product showcase video."
+    ],
+    "sentiment": "Positive"
+  },
+  {
+    "id": "call_mvgfunu5",
+    "created_at": "2026-10-20T08:47:34.265Z",
+    "duration": "01:48",
+    "duration_seconds": 108,
+    "product_id": "nexus-ai",
+    "product_name": "NexusPulse AI",
+    "language": "en",
+    "transcript": [
+      {
+        "sender": "bot",
+        "text": "Hi there! This is Alex from NexusPulse AI. We help B2B teams automate lead follow-ups and 3x their sales pipeline with autonomous AI voice agents. How are you doing today?",
+        "timestamp": "02:15 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Good",
+        "timestamp": "02:16 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Glad to hear that! The reason I'm reaching out is that many B2B teams lose up to 60% of their inbound leads because reps take hours to respond. How is your team currently handling inbound lead follow-up times?",
+        "timestamp": "02:16 PM"
+      },
+      {
+        "sender": "user",
+        "text": "My team is currently handling the time the lead up fall off times just not a sales teams group good",
+        "timestamp": "02:16 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Totally understand you'd like to align with your team and leadership. How about I set up a quick 15-minute tailored live demo with our senior solution architect so your team can test it hands-on together?",
+        "timestamp": "02:16 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes please go ahead",
+        "timestamp": "02:16 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That sounds great! I'd love to set up a quick 15-minute live demo with our senior solution architect to show you how it works hands-on. Does tomorrow morning or afternoon suit you better?",
+        "timestamp": "02:16 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes",
+        "timestamp": "02:17 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Awesome! Which one works better for you — 10:00 AM in the morning or 2:00 PM in the afternoon?",
+        "timestamp": "02:17 PM"
+      },
+      {
+        "sender": "user",
+        "text": "2 PM in the afternoon",
+        "timestamp": "02:17 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Understood! We make it effortless to qualify leads and auto-schedule meetings 24/7. Would it be helpful if I sent you a quick 2-minute overview video, or would you prefer a live demo?",
+        "timestamp": "02:17 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes",
+        "timestamp": "02:17 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That sounds great! I'd love to set up a quick 15-minute live demo with our senior solution architect to show you how it works hands-on. Does tomorrow morning or afternoon suit you better?",
+        "timestamp": "02:17 PM"
+      }
+    ],
+    "recording_url": "/recordings/call_call_mvgfunu5_20261020_141734.webm",
+    "sales_status": "Demo Requested",
+    "status_reason": "Customer expressed direct interest in experiencing a live 15-minute product demonstration or walkthrough.",
+    "summary": "The customer interacted with NexusPulse AI voice sales representative over 6 conversational turns. The sales bot introduced the core value proposition of automated lead conversion. Key discussion centered around automated lead conversion and accelerating inbound response times.. Final sentiment outcome: Demo Requested (Customer expressed direct interest in experiencing a live 15-minute product demonstration or walkthrough.).",
+    "customer_requirements": [
+      "Automated lead conversion and accelerating inbound response times."
+    ],
+    "objections": [
+      "Authority / Consensus: Customer needs buy-in from leadership or internal team."
+    ],
+    "next_steps": [
+      "Send calendar invite with Google Meet link for 15-minute live demo.",
+      "Prepare customized CRM integration walkthrough based on customer industry.",
+      "Send pre-demo 2-minute product showcase video."
+    ],
+    "sentiment": "Positive"
+  },
+  {
+    "id": "call_mvgg3hp9",
+    "created_at": "2026-10-20T08:54:37.240Z",
+    "duration": "01:57",
+    "duration_seconds": 117,
+    "product_id": "nexus-ai",
+    "product_name": "NexusPulse AI",
+    "language": "en",
+    "transcript": [
+      {
+        "sender": "bot",
+        "text": "Hi there! This is Alex from NexusPulse AI. We help B2B teams automate lead follow-ups and 3x their sales pipeline with autonomous AI voice agents. How are you doing today?",
+        "timestamp": "02:22 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Good",
+        "timestamp": "02:22 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Glad to hear that! What’s been your biggest challenge with lead conversion lately?",
+        "timestamp": "02:22 PM"
+      },
+      {
+        "sender": "user",
+        "text": "I don't have any biggest challenge",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "That’s great to hear! It sounds like you're in a good spot. Would you be interested in exploring how our AI platform could further enhance your lead conversion and sales processes?",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Awesome! I’d love to show you how NexusPulse AI can work for you. How about a personalized 15-minute live demo with our senior solution architect? You can see the platform in action and ask any questions you have!",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Yes please go ahead",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Perfect! What’s a good time for you? We can schedule it for tomorrow or later this week.",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Schedule it for tomorrow",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Great! What time works best for you tomorrow? Morning or afternoon?",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Morning",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Awesome! I’ll schedule the demo for tomorrow morning. Can you please provide me with your preferred time, like 10 AM or 11 AM?",
+        "timestamp": "02:23 PM"
+      },
+      {
+        "sender": "user",
+        "text": "10 AM",
+        "timestamp": "02:24 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Got it! Your demo is scheduled for tomorrow at 10 AM. Thank you, and I look forward to showing you how NexusPulse AI can supercharge your sales pipeline!",
+        "timestamp": "02:24 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Ok",
+        "timestamp": "02:24 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Perfect! If you have any questions before the demo, feel free to reach out. Otherwise, see you tomorrow at 10 AM!",
+        "timestamp": "02:24 PM"
+      }
+    ],
+    "recording_url": "/recordings/call_call_mvgg3hp9_20261020_142435.webm",
+    "sales_status": "Demo Requested",
+    "status_reason": "The customer agreed to a demo, indicating interest in the product.",
+    "summary": "The conversation involved a sales call from NexusPulse AI where the AI bot introduced the company's services aimed at automating lead follow-ups. The customer expressed no significant challenges but showed interest in exploring the platform further. A demo was successfully scheduled for the following morning at 10 AM.",
+    "customer_requirements": [],
+    "objections": [
+      "No major objections"
+    ],
+    "next_steps": [
+      "Schedule demo for tomorrow at 10 AM",
+      "Prepare for the demo presentation"
+    ],
+    "sentiment": "Positive"
+  },
+  {
+    "id": "call_mvgsbm88",
+    "created_at": "2026-10-20T14:35:18.479Z",
+    "duration": "00:22",
+    "duration_seconds": 22,
+    "product_id": "nexus-ai",
+    "product_name": "NexusPulse AI",
+    "language": "en",
+    "transcript": [
+      {
+        "sender": "bot",
+        "text": "Hi there! This is Alex, your AI sales assistant from NexusPulse AI. We help B2B teams automate lead follow-ups and 3x their sales pipeline with autonomous AI voice agents. How are you doing today?",
+        "timestamp": "08:04 PM"
+      },
+      {
+        "sender": "user",
+        "text": "Good",
+        "timestamp": "08:05 PM"
+      },
+      {
+        "sender": "bot",
+        "text": "Glad to hear that! Can I ask how your current sales process is working for you? Any specific challenges you’re facing with lead follow-ups?",
+        "timestamp": "08:05 PM"
+      }
+    ],
+    "recording_consent": true,
+    "recording_url": "/recordings/call_call_mvgsbm88_20261020_200514.webm",
+    "sales_status": "Follow-up Required",
+    "status_reason": "The customer did not provide enough information or express interest in a demo, indicating a need for further engagement.",
+    "summary": "The conversation initiated with the AI sales assistant introducing NexusPulse AI and its services. The customer responded positively but did not provide specific details about their sales process or challenges during the call.",
+    "customer_requirements": [
+      "None explicitly stated"
+    ],
+    "objections": [
+      "No major objections identified"
+    ],
+    "next_steps": [
+      "[Suggested] Follow up with the customer for more details on their sales process and challenges."
+    ],
+    "sentiment": "Neutral"
+  }
+]

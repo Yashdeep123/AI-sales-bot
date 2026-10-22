@@ -1,7 +1,4 @@
-"""
-SaaS Product Catalog for AI Voice Sales Bot (Python)
-Provides rich context, value props, objection handling, pricing, and demo offers.
-"""
+"""Product catalog for sales bot."""
 
 SAAS_PRODUCTS = {
     "nexus-ai": {

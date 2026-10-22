@@ -1,18 +1,4 @@
-"""
-AI Call Summarizer and Sales Status Classification Engine (Python)
-Extracts:
-1. Executive Summary
-2. Customer Requirements
-3. Objections Raised
-4. Next Steps
-5. Sales Status (strictly one of the 6 required categories):
-   - Converted
-   - Interested
-   - Follow-up Required
-   - Not Interested
-   - Demo Requested
-   - No Response
-"""
+"""Call summarizer and sales status classifier."""
 
 import json
 import os

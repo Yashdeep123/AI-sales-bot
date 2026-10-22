@@ -1,16 +1,4 @@
-"""
-Comprehensive Test Suite for AWS Cloud Solutions Sales Bot
-Validates:
-1. Product Catalog & Metadata for AWS
-2. Multilingual Greetings (English, Hindi, Telugu)
-3. Discovery & Value Proposition Pitching
-4. Technical Objection Handling (Pricing, Azure/GCP Competitors, Zero-Downtime Migration, CTO Authority)
-5. Contextual Demo / Architecture Assessment Slot Filling
-6. Multi-Turn Sales Call Simulation
-7. Call Summarizer, Requirements Extraction & Sales Status Classification
-8. Live LLM Integration (OpenAI gpt-4o-mini)
-9. Flask REST API Endpoints (/api/products, /api/greeting, /api/chat, /api/summary)
-"""
+"""Tests for AWS sales bot and API endpoints."""
 
 import os
 import unittest

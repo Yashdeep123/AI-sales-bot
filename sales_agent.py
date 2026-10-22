@@ -62,10 +62,7 @@ class SalesAgent:
         return lang_dict["intro"].format(product_name=self.product["name"])
 
     def respond(self, user_message, conversation_history=None):
-        """
-        Main response generator.
-        Uses OpenAI if api_key is present, otherwise uses built-in smart conversational sales brain.
-        """
+        """Generate response via LLM or rule engine."""
         if not user_message or not user_message.strip():
             if self.language == "hi":
                 return "माफ़ कीजिए, मुझे आपकी आवाज़ सुनाई नहीं दी। क्या आप दोहरा सकते हैं?"
@@ -96,7 +93,7 @@ class SalesAgent:
             except Exception as e:
                 print(f"[SalesAgent] LLM error, falling back to rule engine: {e}")
 
-        # Intelligent Context-Aware Rule & Intent State Machine
+        # Rule-based fallback
         return self._rule_based_response(user_message, conversation_history)
 
     def _build_system_prompt(self):
@@ -211,7 +208,7 @@ VOICE GUIDELINES:
             ])
         ) and not demo_already_booked
 
-        # ================= CONTEXTUAL SLOT FILLING =================
+        # Slot filling
         time_slot_words = [
             "morning", "afternoon", "evening", "tomorrow", "today", "tomorrow morning", "tomorrow afternoon",
             "10", "11", "12", "1", "2", "3", "4", "5", "am", "pm", "monday", "tuesday", "wednesday", "thursday", "friday",
@@ -235,7 +232,7 @@ VOICE GUIDELINES:
                 return f"Perfect! I have reserved {slot_name} for your Cloud Architecture & Migration Assessment with our AWS Certified Solutions Architect, along with your AWS Proof-of-Concept credits. You'll receive the calendar invite shortly. Thank you so much for your time today, and have an awesome day ahead!"
             return f"Perfect! I have reserved {slot_name} for your live demo with our senior solution architect, along with your 14-day enterprise trial. You'll receive the calendar invite shortly. Thank you so much for your time today, and have an awesome day ahead!"
 
-        # ================= OBJECTIONS =================
+        # Objections
         # 1. Too expensive / Budget issues
         if any(w in msg_lower for w in ["too expensive", "expensive", "costs too much", "cannot afford", "no budget", "tight budget", "costly", "price is high", "महंगा", "बजट नहीं", "ధర ఎక్కువ", "బడ్జెట్ లేదు"]):
             if self.language == "hi":
@@ -268,7 +265,7 @@ VOICE GUIDELINES:
                 return "बिल्कुल, टीम के साथ विचार-विमर्श करना बहुत ज़रूरी है! क्यों न हम आपकी टीम के साथ 15 मिनट का एक लाइव कस्टमाइज़्ड डेमो रख लें ताकि सभी इसे एक साथ देख सकें? कल या परसों में कौन सा समय सही रहेगा?"
             return self.product["objections"]["authority"]
 
-        # ================= BUYING SIGNALS & DEMO REQUESTS =================
+        # Demo requests
         if any(w in msg_lower for w in ["demo", "book", "schedule", "sign up", "try it", "assessment", "consultation", "डेमो", "డెమో"]):
             if self.language == "hi":
                 if is_aws:
@@ -281,7 +278,7 @@ VOICE GUIDELINES:
                 return "That sounds amazing! I can schedule a tailored 30-minute Cloud Architecture & Migration Assessment with our AWS Certified Solutions Architect and allocate up to $5,000 in AWS POC credits. Does tomorrow morning or afternoon work better for your calendar?"
             return "That sounds amazing! I can schedule a tailored 15-minute live demo with our senior solution architect and activate your 14-day free trial right away. Does tomorrow morning or afternoon work better for your calendar?"
 
-        # ================= DEFINITE NO =================
+        # Definite rejection
         definite_no_phrases = ["not interested", "no thanks", "don't want", "dont want", "ruchi nahi", "दिलचस्पी नहीं", "వద్దు", "not looking"]
         single_words = set(re.findall(r'\b\w+\b', msg_lower))
         if any(w in msg_lower for w in definite_no_phrases) or "never" in single_words or "stop" in single_words:
@@ -298,8 +295,7 @@ VOICE GUIDELINES:
                 return "I completely understand! We appreciate you being upfront. If your team looks into cloud modernization, migration funding, or Amazon Bedrock AI in the future, we're always ready to help. Have a wonderful day!"
             return "I completely understand! We appreciate you being upfront. If your sales workflow needs an AI boost in the future, we're always here at nexuspulse.ai. Thank you for your time and have a wonderful day!"
 
-        # ================= NEEDS-BASED SELLING & DISCOVERY QUESTIONS =================
-        # 1. Cost & Overspending Need
+        # Needs-based: Cost
         if any(w in msg_lower for w in ["bill is high", "skyrocketing", "expensive hosting", "cut costs", "reduce cost", "reduce costs", "save money", "spend too much", "spending too much", "reduce our bill", "cost optimization", "reduce spend", "reduce spending", "hosting costs", "cloud bill"]):
             if self.language == "hi":
                 if is_aws:
@@ -314,7 +310,7 @@ VOICE GUIDELINES:
                 return "I completely understand—unpredictable infrastructure bills are a top concern for engineering teams. With AWS, we routinely help companies reduce their infrastructure TCO by up to 45% through auto-scaling and AWS Savings Plans offering up to 72% discounts. What are your primary workloads driving the highest costs right now—compute instances, databases, or data transfer?"
             return f"I completely understand—controlling sales overhead is crucial. {self.product['name']} typically reduces lead acquisition and qualification costs by up to 70% compared to traditional outbound SDRs. What is your current monthly spend on outbound lead generation?"
 
-        # 2. Downtime, Outages & Scalability Need
+        # Reliability and scalability
         if any(w in msg_lower for w in ["downtime", "crashes", "crashing", "traffic spike", "outages", "outage", "slow performance", "unreliable", "server down", "scaling issues", "scalability"]):
             if self.language == "hi":
                 if is_aws:
@@ -329,7 +325,7 @@ VOICE GUIDELINES:
                 return "I hear you—downtime directly impacts revenue and user trust. AWS delivers industry-leading 99.999% SLA availability across Multi-AZ architectures with Elastic Load Balancing to absorb traffic spikes seamlessly. Are your current applications containerized on Docker or Kubernetes, or running on traditional virtual machines?"
             return f"I hear you—slow response times and missed calls directly hurt conversions. {self.product['name']} handles thousands of simultaneous calls 24/7 with zero hold time and 99.9% uptime. How many inbound inquiries are currently getting delayed or missed after hours?"
 
-        # 3. Generative AI & Foundation Models Need
+        # Generative AI inquiries
         if any(w in msg_lower for w in ["generative ai", "genai", "llm", "bedrock", "claude", "foundation models", "ai features", "ai models", "custom models", "gpt"]):
             if self.language == "hi":
                 if is_aws:
@@ -344,7 +340,7 @@ VOICE GUIDELINES:
                 return "That's exciting! Amazon Bedrock provides fully managed access to leading foundation models like Claude 3.5 Sonnet and Amazon Titan through a single API, with enterprise privacy where your data is never used to train base models. Are you planning to build customer-facing AI applications or internal workflow automation?"
             return f"That's great! {self.product['name']} utilizes state-of-the-art conversational LLMs and ultra-low latency voice models to deliver human-like sales conversations. What specific customer touchpoints are you most eager to automate with AI?"
 
-        # 4. Security, Compliance & Governance Need
+        # Security and compliance
         if any(w in msg_lower for w in ["security", "compliance", "soc 2", "soc2", "hipaa", "gdpr", "pci", "data privacy", "isolated", "encryption"]):
             if self.language == "hi":
                 if is_aws:
@@ -359,7 +355,7 @@ VOICE GUIDELINES:
                 return "Security is job zero at AWS. The AWS Cloud supports 143 security standards including SOC 1/2/3, HIPAA, PCI-DSS, and FedRAMP, with fine-grained IAM controls and end-to-end encryption in private VPCs. Which specific compliance certifications or data residency regulations does your organization need to meet?"
             return f"Security is our top priority. {self.product['name']} is SOC 2 compliant, fully GDPR ready, and all call transcripts and audio streams are encrypted end-to-end. Does your company require specific data retention or compliance policies for customer conversations?"
 
-        # 5. Current Setup / Discovery Trigger (On-premise / Datacenter / Manual workflow)
+        # Infrastructure discovery
         if any(w in msg_lower for w in ["on-premise", "on-prem", "our own servers", "bare metal", "colocation", "datacenter", "private datacenter", "local servers", "manage our own"]):
             if self.language == "hi":
                 if is_aws:
@@ -374,7 +370,7 @@ VOICE GUIDELINES:
                 return "Thank you for sharing that! Managing your own infrastructure gives you control, but hardware refreshes and maintenance can become a heavy lift. What is the single biggest bottleneck with your on-premise setup today—is it hardware maintenance costs, scalability during peak traffic, or deployment speed?"
             return f"Thank you for sharing that! Relying on manual workflows gives you hands-on control, but can bottleneck your team's growth. What is the biggest challenge your team faces today—follow-up speed, call volume, or lead qualification accuracy?"
 
-        # ================= PRICING INQUIRY =================
+        # Pricing questions
         if any(w in msg_lower for w in ["price", "cost", "pricing", "how much", "charges", "rate", "plans", "plan", "budget", "billing", "कीमत", "दाम", "लागत", "ధర", "ఖర్చు"]):
             if self.language == "hi":
                 if is_aws:
@@ -389,7 +385,7 @@ VOICE GUIDELINES:
                 return "AWS operates on a flexible pay-as-you-go model with Savings Plans that reduce compute spend by up to 72%. Our managed Starter Migration packages start at $499 per month, backed by up to $5,000 in AWS POC credits. Would you like to explore a free Cloud Cost & Architecture Assessment?"
             return f"Our plans start at just $99 per month for Starter, and $299 for our popular Growth tier with full voice cloning and CRM sync. Plus, we offer a risk-free 14-day free trial. Would you like me to set you up with the trial?"
 
-        # ================= GENERIC YES / SURE / SOUNDS GOOD =================
+        # Confirmation / positive intent
         yes_phrases = ["yes", "yeah", "yep", "sure", "sounds good", "interested", "okay", "i am interested", "definitely", "हाँ", "जरूर", "అవును", "సరే"]
         if any(w in msg_lower for w in yes_phrases) or "ok" in single_words:
             if bot_asked_demo_time:
@@ -410,7 +406,7 @@ VOICE GUIDELINES:
                     return "That sounds great! I'd love to set up a quick 30-minute Cloud Architecture & Migration Assessment with our AWS Certified Solutions Architect to review your infrastructure. Does tomorrow morning or afternoon suit you better?"
                 return "That sounds great! I'd love to set up a quick 15-minute live demo with our senior solution architect to show you how it works hands-on. Does tomorrow morning or afternoon suit you better?"
 
-        # ================= FEATURES / HOW IT WORKS / CLOUD / MIGRATION =================
+        # Features and technical scope
         if any(w in msg_lower for w in ["how it works", "features", "what does it do", "how does it work", "integration", "crm", "zapier", "what is it", "cloud", "aws", "migration", "server", "ec2", "s3", "bedrock", "ai", "database", "rds", "lambda", "kubernetes", "hosting", "infrastructure", "काम कैसे करता है", "ఎలా పనిచేస్తుంది"]):
             if self.language == "hi":
                 if is_aws:
@@ -421,7 +417,7 @@ VOICE GUIDELINES:
                 return "That sounds like a great architecture direction! AWS provides enterprise compute with Amazon EC2 and Lambda, durable S3 storage, managed RDS databases, and cutting-edge Generative AI on Amazon Bedrock, all backed by 99.999% SLA reliability. Would you like to schedule a quick 30-minute Cloud Architecture Assessment to see how it fits your stack?"
             return f"That's great! {self.product['name']} instantly engages your inbound leads with natural sub-second voice AI, answers their queries, qualifies their budget, and directly schedules qualified calls on your sales calendar. Would you like to see a quick 15-minute live demo of it in action?"
 
-        # ================= GREETINGS / SMALL TALK =================
+        # Greetings and small talk
         greeting_words = [
             "good", "doing good", "doing well", "fine", "great", "im good", "i am good", "i'm good", "all good",
             "pretty good", "not bad", "awesome", "nice", "hello", "hi", "hey", "good morning", "good afternoon",
@@ -441,7 +437,7 @@ VOICE GUIDELINES:
                 return "Glad to hear that! The reason I'm reaching out is that many engineering teams face high on-prem datacenter costs and are looking to modernize with AWS cloud infrastructure and Generative AI on Bedrock. How is your team currently hosting your workloads?"
             return f"Glad to hear that! The reason I'm reaching out is that many B2B teams lose up to 60% of their inbound leads because reps take hours to respond. How is your team currently handling inbound lead follow-up times?"
 
-        # ================= DYNAMIC ROTATING FALLBACKS (ANTI-REPETITION) =================
+        # Fallbacks
         fallback_options_aws = [
             f"That's a great point! With AWS Cloud Solutions, our certified architects can help reduce your infrastructure TCO by up to 45% and migrate workloads with zero downtime using AWS DMS. Would you be open to a quick 30-minute architecture review this week?",
             f"I hear you! Many engineering leaders choose AWS to eliminate hardware bottlenecks and accelerate deployment of Generative AI microservices using Amazon Bedrock. Are you looking to modernize your cloud or AI architecture this quarter?",

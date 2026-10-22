@@ -1,9 +1,4 @@
-"""
-Automated Multi-Turn Sales Bot Simulation and Quality Evaluator.
-Executes 5 realistic end-to-end sales conversations across distinct customer personas,
-evaluates compliance against the 4 core expert sales rules, extracts summaries and qualification statuses,
-and writes a detailed markdown report for offline verification.
-"""
+"""Multi-turn conversation simulation across buyer personas."""
 
 import json
 import os

@@ -1,11 +1,4 @@
-"""
-Unit and Integration Test Suite: Expert AI Sales Bot Verification
-Covers the 4 Core Sales Principles:
-1. Bot behaves as an expert sales person and handles customer appropriately
-2. Bot asks the discovery and qualifying questions a sales expert asks
-3. Bot sells the product dynamically matched to the prospect's stated needs
-4. Bot maintains an empathetic, polite, and consultative tone at all times
-"""
+"""Tests for sales conversation behavior and guidelines."""
 
 import unittest
 from sales_agent import SalesAgent
